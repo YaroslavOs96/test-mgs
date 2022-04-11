@@ -10,7 +10,6 @@ window.addEventListener('load', () => {
     document.addEventListener('input', handleInput);
 
     socket.addEventListener('message', function (event) {
-        console.log('socket', event);
         renderTableData(JSON.parse(event.data).data)
     });
 
@@ -19,8 +18,6 @@ window.addEventListener('load', () => {
             closeModal();
         }
     });
-
-
 
     function handleInput(e) {
         if (e.target.getAttribute('class') === 'input_location') {
@@ -74,11 +71,8 @@ window.addEventListener('load', () => {
     }
     function sendData() {
         document.querySelector('#btn_submit').classList.add('hide');
-
         data = collectData()
         socket.send(JSON.stringify({ "sendNewData": data }));
-        console.log(JSON.stringify({ "sendNewData": data }));
-
         showJSONData(JSON.stringify(data))
     }
 
